@@ -1,4 +1,4 @@
-package com.devmare.springCoreDemo;
+package com.devmare.springCoreDemo.common;
 
 public interface Coach {
     String getDailyWordOut();
