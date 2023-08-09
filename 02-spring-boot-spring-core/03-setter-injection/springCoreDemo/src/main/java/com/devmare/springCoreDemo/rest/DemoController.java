@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
 
-    @Autowired
     private Coach coach;
 
-    public DemoController(Coach coach) {
+    @Autowired
+    public void setCoach(Coach coach) {
         this.coach = coach;
     }
 
