@@ -1,15 +1,25 @@
 package com.devmare.springCoreDemo.common;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class CricketCouch implements Coach {
 
     public CricketCouch() {
         System.out.println("In CricketCouch Constructor");
+    }
+
+    //! Define our init method
+    @PostConstruct
+    public void doMyStartUpStuff() {
+        System.out.println("Hey! in doMyStartUpStuff(): " + getClass().getName());
+    }
+    //! Define our destroy method
+    @PreDestroy
+    public void doMyCleanUpStuff() {
+        System.out.println("Hey! in doMyCleanUpStuff(): " + getClass().getName());
     }
 
     @Override
