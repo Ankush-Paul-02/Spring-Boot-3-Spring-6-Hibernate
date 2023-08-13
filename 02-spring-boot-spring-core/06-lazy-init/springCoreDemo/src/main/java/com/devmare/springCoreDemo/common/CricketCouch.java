@@ -1,11 +1,13 @@
 package com.devmare.springCoreDemo.common;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
-@Primary
 public class CricketCouch implements Coach {
+
+    public CricketCouch() {
+        System.out.println("In CricketCouch Constructor");
+    }
 
     @Override
     public String getDailyWordOut() {
