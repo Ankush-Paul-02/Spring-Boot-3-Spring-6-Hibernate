@@ -1,10 +1,10 @@
-package com.devmare.demo.dao;
+package com.devmare.demo.service;
 
 import com.devmare.demo.entity.Employee;
 
 import java.util.List;
 
-public interface EmployeeDAO {
+public interface EmployeeService {
     List<Employee> findAll();
     Employee findById(int id);
     Employee saveEmployee(Employee employee);
