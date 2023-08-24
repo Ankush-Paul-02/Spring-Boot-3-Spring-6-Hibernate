@@ -1,4 +1,4 @@
-package com.luv2code.springboot.cruddemo.rest;
+package com.luv2code.springboot.cruddemo.controller;
 
 import com.luv2code.springboot.cruddemo.entity.Employee;
 import com.luv2code.springboot.cruddemo.service.EmployeeService;
@@ -48,9 +48,7 @@ public class EmployeeRestController {
 
         theEmployee.setId(0);
 
-        Employee dbEmployee = employeeService.save(theEmployee);
-
-        return dbEmployee;
+        return employeeService.save(theEmployee);
     }
 
     // add mapping for PUT /employees - update existing employee
