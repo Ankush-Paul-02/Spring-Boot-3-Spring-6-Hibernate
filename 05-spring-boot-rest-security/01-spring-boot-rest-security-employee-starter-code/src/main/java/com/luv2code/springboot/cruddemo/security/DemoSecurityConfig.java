@@ -5,21 +5,37 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
 
+
 @Configuration
+@EnableWebSecurity
 public class DemoSecurityConfig {
 
     //! Add support for JDBC ... more hardcoded users
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
         //? Tells Spring security to use JDBC auth with our data source
-        return new JdbcUserDetailsManager(dataSource);
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+
+        //? Define query to retrieve a user by username
+        jdbcUserDetailsManager.setUsersByUsernameQuery(
+                "select user_id, pw, active from members where user_id=?"
+        );
+        //? Define query to retrieve a the roles by username
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+                "select user_id, role from roles where user_id=?"
+        );
+        return jdbcUserDetailsManager;
     }
 
     @Bean
@@ -42,12 +58,12 @@ public class DemoSecurityConfig {
     /*@Bean
     public InMemoryUserDetailsManager userDetailsManager() {
 
-        UserDetails ankush = User.builder().username("ankush").password("{noop}232002")   //? noop = plain text
+        UserDetails ankush = User.builder().username("ankush").password("{bcrypt}$2a$10$qeS0HEh7urweMojsnwNAR.vcXJeXR1UcMRZ2WcGQl9YeuspUdgF.q")   //? noop = plain text
                 .roles("EMPLOYEE").build();
 
-        UserDetails sid = User.builder().username("sid").password("{noop}232002").roles("EMPLOYEE", "MANAGER").build();
+        UserDetails sid = User.builder().username("sid").password("{bcrypt}$2a$10$qeS0HEh7urweMojsnwNAR.vcXJeXR1UcMRZ2WcGQl9YeuspUdgF.q").roles("EMPLOYEE", "MANAGER").build();
 
-        UserDetails deepon = User.builder().username("deepon").password("{noop}232002").roles("EMPLOYEE", "MANAGER", "ADMIN").build();
+        UserDetails deepon = User.builder().username("deepon").password("{bcrypt}$2a$10$qeS0HEh7urweMojsnwNAR.vcXJeXR1UcMRZ2WcGQl9YeuspUdgF.q").roles("EMPLOYEE", "MANAGER", "ADMIN").build();
         return new InMemoryUserDetailsManager(ankush, sid, deepon);
     }*/
 }
