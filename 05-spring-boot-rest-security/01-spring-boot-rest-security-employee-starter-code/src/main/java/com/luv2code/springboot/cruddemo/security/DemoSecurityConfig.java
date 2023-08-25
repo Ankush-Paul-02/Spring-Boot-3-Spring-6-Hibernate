@@ -6,23 +6,20 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class DemoSecurityConfig {
+
+    //! Add support for JDBC ... more hardcoded users
     @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-
-        UserDetails ankush = User.builder().username("ankush").password("{noop}232002")   //? noop = plain text
-                .roles("EMPLOYEE").build();
-
-        UserDetails sid = User.builder().username("sid").password("{noop}232002").roles("EMPLOYEE", "MANAGER").build();
-
-        UserDetails deepon = User.builder().username("deepon").password("{noop}232002").roles("EMPLOYEE", "MANAGER", "ADMIN").build();
-        return new InMemoryUserDetailsManager(ankush, sid, deepon);
+    public UserDetailsManager userDetailsManager(DataSource dataSource) {
+        //? Tells Spring security to use JDBC auth with our data source
+        return new JdbcUserDetailsManager(dataSource);
     }
 
     @Bean
@@ -41,4 +38,16 @@ public class DemoSecurityConfig {
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
         return httpSecurity.build();
     }
+
+    /*@Bean
+    public InMemoryUserDetailsManager userDetailsManager() {
+
+        UserDetails ankush = User.builder().username("ankush").password("{noop}232002")   //? noop = plain text
+                .roles("EMPLOYEE").build();
+
+        UserDetails sid = User.builder().username("sid").password("{noop}232002").roles("EMPLOYEE", "MANAGER").build();
+
+        UserDetails deepon = User.builder().username("deepon").password("{noop}232002").roles("EMPLOYEE", "MANAGER", "ADMIN").build();
+        return new InMemoryUserDetailsManager(ankush, sid, deepon);
+    }*/
 }
