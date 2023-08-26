@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Index Page</title>
+    <!-- references -->
+    <link rel="stylesheet" th:href="@{/css/demo.css}"/>
 </head>
-<body>
-    Hello Ankush Welcome! <br>
-    <p th:text="'Time on the server 8081 is: ' + ${theDate}"></p>
+<body bgcolor="black">
+    <p th:text="'Time on the server 8081 is: ' + ${theDate}" class="devStyle"></p>
 </body>
 </html>
