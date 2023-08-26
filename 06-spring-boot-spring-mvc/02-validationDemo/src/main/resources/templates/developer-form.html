@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DevForm</title>
+    <style>
+        .error {color: red}
+    </style>
+</head>
+<body>
+
+<i>Fill out the form. Asterisk (*) means required.</i>
+<br>
+
+<!--1. where we submit the data-->
+<!--2. Model attribute name of Developer-->
+<!--3. Send using POST method-->
+<form method="post" th:action="@{/processForm}" th:object="${developer}">
+    First name: <input th:field="*{firstName}" type="text"/>
+    <br>
+    Last name: <input th:field="*{lastName}" type="text"/>
+
+    <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+
+    <br>
+
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
