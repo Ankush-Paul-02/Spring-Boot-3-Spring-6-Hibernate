@@ -18,10 +18,13 @@
 <form method="post" th:action="@{/processForm}" th:object="${developer}">
     First name: <input th:field="*{firstName}" type="text"/>
     <br>
-    Last name: <input th:field="*{lastName}" type="text"/>
+    Last name (*): <input th:field="*{lastName}" type="text"/>
 
     <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
 
+    <br>
+    Free passes: <input th:field="*{freePasses}" type="text"/>
+    <span class="error" th:if="${#fields.hasErrors('freePasses')}" th:errors="*{freePasses}"></span>
     <br>
 
     <input type="submit" value="Submit">
