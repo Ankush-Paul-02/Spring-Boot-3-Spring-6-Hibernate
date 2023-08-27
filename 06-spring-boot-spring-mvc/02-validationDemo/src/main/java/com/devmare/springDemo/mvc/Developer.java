@@ -8,15 +8,15 @@ public class Developer {
     @Size(min = 1, message = "is required")
     private String lastName = "";
 
+    @NotNull(message = "is required")
     @Min(value = 0, message = "Minimum value must be greater than or equal to 0")
     @Max(value = 10, message = "Maximum value must be less than or equal to 10")
-    private int freePasses;
+    private Integer freePasses;
 
     @Pattern(regexp = "^[a-zA-Z0-9]{6}", message = "Only 6 chars/digits")
     private String postalCode;
 
-    public Developer() {
-    }
+    public Developer() {}
 
     public String getFirstName() {
         return firstName;
@@ -34,11 +34,11 @@ public class Developer {
         this.lastName = lastName;
     }
 
-    public int getFreePasses() {
+    public Integer getFreePasses() {
         return freePasses;
     }
 
-    public void setFreePasses(int freePasses) {
+    public void setFreePasses(Integer freePasses) {
         this.freePasses = freePasses;
     }
 
