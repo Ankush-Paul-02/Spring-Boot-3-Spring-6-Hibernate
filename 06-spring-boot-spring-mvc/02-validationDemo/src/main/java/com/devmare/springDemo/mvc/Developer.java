@@ -1,5 +1,6 @@
 package com.devmare.springDemo.mvc;
 
+import com.devmare.springDemo.mvc.validation.CourseCode;
 import jakarta.validation.constraints.*;
 
 public class Developer {
@@ -15,6 +16,9 @@ public class Developer {
 
     @Pattern(regexp = "^[a-zA-Z0-9]{6}", message = "Only 6 chars/digits")
     private String postalCode;
+
+    @CourseCode(value = "PAUL", message = "Must be start with PAUL")
+    private String courseCode;
 
     public Developer() {}
 
@@ -48,5 +52,13 @@ public class Developer {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 }

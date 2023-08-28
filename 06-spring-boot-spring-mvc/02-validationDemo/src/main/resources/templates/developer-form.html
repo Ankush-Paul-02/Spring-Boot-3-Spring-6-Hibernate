@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>DevForm</title>
     <style>
-        .error {color: red}
+        .error {
+            color: red
+        }
     </style>
 </head>
 <body>
@@ -20,15 +22,19 @@
     <br>
     Last name (*): <input th:field="*{lastName}" type="text"/>
 
-    <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+    <span class="error" th:errors="*{lastName}" th:if="${#fields.hasErrors('lastName')}"></span>
 
     <br>
     Free passes (*): <input th:field="*{freePasses}" type="text"/>
-    <span class="error" th:if="${#fields.hasErrors('freePasses')}" th:errors="*{freePasses}"></span>
+    <span class="error" th:errors="*{freePasses}" th:if="${#fields.hasErrors('freePasses')}"></span>
     <br>
 
     Postal code: <input th:field="*{postalCode}" type="text"/>
-    <span class="error" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
+    <span class="error" th:errors="*{postalCode}" th:if="${#fields.hasErrors('postalCode')}"></span>
+    <br>
+
+    Course code: <input th:field="*{courseCode}" type="text"/>
+    <span class="error" th:errors="*{courseCode}" th:if="${#fields.hasErrors('courseCode')}"></span>
     <br>
 
     <input type="submit" value="Submit">

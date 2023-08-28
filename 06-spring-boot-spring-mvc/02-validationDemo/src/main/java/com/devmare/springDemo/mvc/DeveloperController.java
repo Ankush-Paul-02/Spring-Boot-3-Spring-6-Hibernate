@@ -34,6 +34,7 @@ public class DeveloperController {
             @Valid @ModelAttribute("developer") Developer developer,
             BindingResult bindingResult) {
         System.out.println("Last name: | " + developer.getLastName() + " |");
+        System.out.println("Binding result: " + bindingResult.toString());
         if (bindingResult.hasErrors()) {
             return "developer-form";
         } else {
