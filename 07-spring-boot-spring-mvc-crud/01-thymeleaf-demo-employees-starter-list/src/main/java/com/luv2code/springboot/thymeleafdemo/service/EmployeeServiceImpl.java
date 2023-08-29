@@ -12,7 +12,7 @@ import com.luv2code.springboot.thymeleafdemo.entity.Employee;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-	private EmployeeRepository employeeRepository;
+	private final EmployeeRepository employeeRepository;
 	
 	@Autowired
 	public EmployeeServiceImpl(EmployeeRepository theEmployeeRepository) {
