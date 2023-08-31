@@ -21,12 +21,12 @@ public class DemoSecurityConfig {
         UserDetails sid = User.builder()
                 .username("sid")
                 .password("{noop}test123")
-                .roles("EMPLOYEE, MANAGER")
+                .roles("EMPLOYEE", "MANAGER")
                 .build();
         UserDetails deepon = User.builder()
                 .username("deepon")
                 .password("{noop}test123")
-                .roles("EMPLOYEE, MANAGER, ADMIN")
+                .roles("EMPLOYEE", "MANAGER", "ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(ankush, sid, deepon);
     }
@@ -36,6 +36,9 @@ public class DemoSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(configure ->
                         configure
+                                .requestMatchers("/").hasRole("EMPLOYEE")
+                                .requestMatchers("/leaders/**").hasRole("MANAGER")
+                                .requestMatchers("/systems/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .formLogin(form ->
