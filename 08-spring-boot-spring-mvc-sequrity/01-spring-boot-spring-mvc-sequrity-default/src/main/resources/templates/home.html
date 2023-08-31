@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
@@ -8,5 +8,10 @@
     <h2>Devmare Company</h2>
     <hr>
     Welcome to Devmare company home page.
+    <hr>
+    <!-- Add a logout button -->
+    <form action="#" method="post" th:action="@{/logout}">
+        <input type="submit" value="Logout">
+    </form>
 </body>
 </html>
