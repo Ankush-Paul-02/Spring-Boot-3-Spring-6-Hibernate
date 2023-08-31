@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
+
+    <style>
+        .failed {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 
@@ -12,7 +18,7 @@
 
     <!-- Check for login error -->
     <div th:if="${param.error}">
-        <i>Sorry! You entered invalid username/password.</i>
+        <i class="failed">Sorry! You entered invalid username/password.</i>
     </div>
 
     <p>
