@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Confirmation</title>
+</head>
+<body>
+
+<h2>User registered successfully!</h2>
+
+<!-- display first name, last name and email -->
+<ul>
+  <li th:text="'User name: ' + ${webUser.userName}"></li>
+  <li th:text="'First name: ' + ${webUser.firstName}"></li>
+  <li th:text="'Last name: ' + ${webUser.lastName}"></li>
+  <li th:text="'Email name: ' + ${webUser.email}"></li>
+</ul>
+
+<hr>
+
+<a th:href="@{/showMyLoginPage}">Login with new user name</a>
+
+
+</body>
+</html>
