@@ -47,8 +47,8 @@ public class DemoSecurityConfig {
                                 .loginProcessingUrl("/authenticateTheUser") //? No controller request mapping required for this process url. We got this for free
                                 .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll
-                );
+                .logout(LogoutConfigurer::permitAll)
+                .exceptionHandling(configure -> configure.accessDeniedPage("/access-denied"));
         return httpSecurity.build();
     }
 }
