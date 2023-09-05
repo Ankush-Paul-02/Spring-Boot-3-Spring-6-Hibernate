@@ -21,8 +21,16 @@ public class CrudDemoApplication {
             // createInstructor(appDao);
             // findInstructorById(appDao);
             // deleteInstructorById(appDao);
-            findInstructorDetailById(appDao);
+            // findInstructorDetailById(appDao);
+            deleteInstructorDetailByrId(appDao);
         };
+    }
+
+    private void deleteInstructorDetailByrId(AppDao appDao) {
+        int id = 7;
+        System.out.println("Deleting instructor detail of id: " + id);
+        appDao.deleteInstructorDetailById(id);
+        System.out.println("Deleted...");
     }
 
     private void findInstructorDetailById(AppDao appDao) {
@@ -55,11 +63,11 @@ public class CrudDemoApplication {
     private void createInstructor(AppDao appDao) {
         //! Create the instructor
         Instructor instructor = new Instructor(
-                "Sid", "Mahato", "sid@gmail.com"
+                "Deepon", "Das", "deepon@gmail.com"
         );
         //! Create instructor details
         InstructorDetail instructorDetail = new InstructorDetail(
-                "Devmare", "Reading"
+                "Devmare", "Reels"
         );
         //! Associate the objects
         instructor.setInstructorDetail(instructorDetail);
