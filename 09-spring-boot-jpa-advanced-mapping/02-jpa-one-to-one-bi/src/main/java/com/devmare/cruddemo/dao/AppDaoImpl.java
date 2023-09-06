@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class AppDaoImpl implements AppDao {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
     public AppDaoImpl(EntityManager entityManager) {
@@ -46,6 +46,8 @@ public class AppDaoImpl implements AppDao {
     @Transactional
     public void deleteInstructorDetailById(int id) {
         InstructorDetail instructorDetail= entityManager.find(InstructorDetail.class, id);
+        //! Remove the associated object ref
+        instructorDetail.getInstructor().setInstructorDetail(null);
         entityManager.remove(instructorDetail);
     }
 }
